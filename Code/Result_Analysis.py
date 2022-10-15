@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[32]:
-
-
 #Import library
 import numpy as np
 import pandas as pd
@@ -19,7 +13,6 @@ y_pre = frame[['Predict']]
 
 #Calculate TN, TP, FP, FN from confusion_matrix
 #Calculate Accuracy, Precision, TPR, FPR, TNR, FNR
-
 TN, FP, FN, TP = confusion_matrix(y_ture, y_pre).ravel()
 Acc = (TP+TN)/(TP+TN+FP+FN)
 Precision = TP/(TP+FP)
@@ -39,10 +32,6 @@ print('FPR: ',FPR*100)
 print('TNR: ',TNR*100)
 print('FNR: ',FNR*100)
 
-
-# In[33]:
-
-
 #ROC_AUC curve
 fpr,tpr,treshold= roc_curve(y_ture,y_pre)
 auc_sc=auc(fpr,tpr)*100
@@ -54,12 +43,7 @@ plt.ylabel('True Positive Rate-->')
 plt.legend()
 plt.show()
 
-
-# In[ ]:
-
-
 #Area Under The Precision-Recall Curve (AUPRC)
-
 train1=pd.read_csv("E:/R3(DNA)/Material/R.chinensis/50_50/Train_(60_40).csv")
 test1=pd.read_csv("E:/R3(DNA)/Material/R.chinensis/50_50/Test(60_40).csv")
 x_train1 =train1.drop(['Target'], axis=1)
@@ -110,4 +94,3 @@ y_score = model.predict_proba(X_test)[:, 1]
 precision, recall, thresholds = precision_recall_curve(y_test, y_score)
 auc_precision_recall = auc(recall, precision)
 print(auc_precision_recall)
-
