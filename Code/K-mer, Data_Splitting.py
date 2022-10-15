@@ -3,7 +3,6 @@ import numpy as np
 import pandas as pd
 
 #Load dataset
-
 #df = pd.read_csv('E:/R3(DNA)/Material/C.elegans/C_elegans.csv')
 #df = pd.read_csv('E:/R3(DNA)/Material/D.melanogaster/D_melanogaster.csv')
 #df = pd.read_csv('E:/R3(DNA)/Material/A.thaliana/A_thaliana.csv')
@@ -16,7 +15,6 @@ df = pd.read_csv('E:/R3(DNA)/Material/R.chinensis/R_chinensis.csv')
 df.head()
 
 #Function to convert sequence strings into k-mer words
-
 def getKmers(sequence, size=3):
     return [sequence[x:x+size].lower() for x in range(len(sequence) - size + 1)]
 
@@ -33,7 +31,6 @@ dna_kmer['Target']=y_data
 dna_kmer
 
 #Save dataset after k-mer
-
 #dna_kmer.to_csv('E:/R3(DNA)/Material/C.elegans/C_elegans_Dnakmer.csv')
 #dna_kmer.to_csv('E:/R3(DNA)/Material/D.melanogaster/D_melanogaster_Dnakmer.csv')
 #dna_kmer.to_csv('E:/R3(DNA)/Material/A.thaliana/A_thaliana_Dnakmer.csv')
@@ -44,7 +41,6 @@ dna_kmer
 dna_kmer.to_csv('E:/R3(DNA)/Material/R.chinensis/R_chinensis_Dnakmer.csv') 
 
 #Dataset splitting into train and test
-
 #df2 = pd.read_csv('E:/R3(DNA)/Material/C.elegans/C_elegans_Dnakmer.csv')
 #df2 = pd.read_csv('E:/R3(DNA)/Material/D.melanogaster/D_melanogaster_Dnakmer.csv')
 #df2 = pd.read_csv('E:/R3(DNA)/Material/A.thaliana/A_thaliana_Dnakmer.csv')
