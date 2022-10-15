@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 """After each layer's classification is complete, the correctly classified data is added to the pre-training data 
 and compared with the predefined target values in the original data set and inserted into the next layer. In the next 
 iteration, the misclassified data is used as new test data. This process continues until all models have improved 
@@ -24,10 +18,6 @@ from tensorflow.keras.preprocessing.text import Tokenizer
 from keras.layers import Conv1D,GlobalMaxPooling1D, Flatten
 from tensorflow.keras.layers import Dense, Activation, Dropout
 from tensorflow.keras.preprocessing.sequence import pad_sequences
-
-
-# In[ ]:
-
 
 #Load data
 train1=pd.read_csv("E:/R3(DNA)/Material/R.chinensis/50_50/1st_iteration/Train.csv")
@@ -71,10 +61,6 @@ print('Padding (Test[0]): ', test_X1[0])
 print('\nVocab Size (Train): ', len(train_vocab1))
 print('Vocab Size (Test): ', len(test_vocab1))
 
-
-# In[3]:
-
-
 #Transfer the sequences into vector form
 DIM=100
 def get_weight_matrix1(model):
@@ -87,19 +73,11 @@ def get_weight_matrix1(model):
 w2v_model1 = gensim.models.Word2Vec(sentences=x_train1, size=DIM, min_count=1)
 embedding_vectors1 = get_weight_matrix1(w2v_model1)
 
-
-# In[4]:
-
-
 #Converted into a matrix 
 X_train1 = np.asarray(train_X1)
 X_test1 = np.asarray(test_X1)
 y_train1=to_categorical(y_train1)
 y_test1=to_categorical(y_test1)
-
-
-# In[6]:
-
 
 #Create the embedding layer
 embedding_layer1 = Embedding(train_vocab_size1,output_dim=DIM, weights=[embedding_vectors1], input_length=train_max_length1)
@@ -150,12 +128,7 @@ model3.compile(optimizer='adam', loss="categorical_crossentropy", metrics=["accu
 model3.summary()
 model3.fit(X_train1,y_train1,epochs=10,batch_size=64, validation_data=(X_test1,y_test1))
 
-
-# In[7]:
-
-
 #Grid search for the best combination of w1, w2, w3 that gives maximum acuracy
-
 models1 = [model1, model2, model3]
 preds1 = [model.predict(X_test1) for model in models1]
 preds1=np.array(preds1)
@@ -177,10 +150,6 @@ for w1 in range(0, 5):
                                          'wt_c':wts[2], 'acc':weighted_accuracy1*100}, index=[0]), ignore_index=True)
 max_acc_row1 = df1.iloc[df1['acc'].idxmax()]
 print(max_acc_row1)
-
-
-# In[8]:
-
 
 #Average Ensemble
 summed1 = np.sum(preds1, axis=0)
@@ -207,12 +176,7 @@ print('Accuracy Score for model3 = ', c_accuracy1)
 print('Accuracy Score for average ensemble = ', AVE_accuracy1)
 print('Accuracy Score for weighted average ensemble = ', WAE_accuracy1)
 
-
-# In[10]:
-
-
 #Separate correctly classified and misclassified data and save in different csv files
-
 print("Train_size:",len(train1),"| Test_size:",len(test1))
 
 if AVE_accuracy1 > WAE_accuracy1 :
@@ -251,4 +215,3 @@ else:
 	TP_TN_WAE_1=test1[test1['match']=='True']
 	TP_TN_WAE_1.to_csv('E:/R3(DNA)/Material/R.chinensis/50_50/1st_iteration/1.CSV')
 	print("WAE_TN_TP: ",len(TP_TN_WAE_1))
-
