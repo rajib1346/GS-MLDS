@@ -1,4 +1,4 @@
-"""After each layers classification is complete, the correctly classified data is added to the pre-training data 
+"""After each layer's classification is complete, the correctly classified data is added to the pre-training data 
 and compared with the predefined target values in the original data set and inserted into the next layer. In the next 
 iteration, the misclassified data is used as new test data. This process continues until all models have improved 
 performance (TP and TN = 0)"""
