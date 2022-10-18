@@ -70,7 +70,7 @@ def get_weight_matrix1(model):
         weight_matrix[i]=model.wv[word]
     return weight_matrix
 
-w2v_model1 = gensim.models.Word2Vec(sentences=x_train1, size=DIM, min_count=1)
+w2v_model1 = gensim.models.Word2Vec(sentences=x_train1, size=100, window=10, min_count=5, negative=5, epochs=25)
 embedding_vectors1 = get_weight_matrix1(w2v_model1)
 
 #Converted into a matrix 
